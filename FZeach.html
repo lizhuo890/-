@@ -55,4 +55,34 @@
     table.border='1';
     table.width='80%';
     document.body.appendChild(table);
+
+    function get(index){
+        if(index===undefined){
+            return this.toArray();
+        }
+        else{
+            if(index>=0){
+                return this[index];
+            }else if(index<0){
+                return this[this.length+index];
+            }
+        }
+    }
+    var $dvs = $( 'div' );
+
+    // 1, 无参数的 get 方法
+    var array1 = $dvs.get();
+
+    // 2, 带有一个数字参数
+    var item1 = $dvs.get( 2 );  // div3
+
+    // 3, 带有一个超出索引范围的参数
+    var item2 = $dvs.get( 3 );  // undefined
+
+    // 4, 带有一个 负数 参数
+    var item3 = $dvs.get( -1 ); // div3
+
+    // 5, 带有一个超出索引范围的 负数 参数
+    var item4 = $dvs.get( -2 ); // div2
+    var item5 = $dvs.get( -4 ); // undefined
 </script>
