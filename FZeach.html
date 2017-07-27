@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function isArrayLike(array){
+        var length=array&&array.length;
+        return typeof length==='number'&&length>=0;
+    }
+
+    function each(array,callback){
+        var i,k;
+        if(isArrayLike(array)){
+            for( i=0;i<array.length;i++){
+                if(callback.call(array[i],i,array[i])===false) break;
+            }
+        }else{
+            for( k in array){
+                if(callback.call(array[i],k,array[k])===false) break;
+            }
+        }
+        return array;
+    }
+    var data = [
+        { name: 'jim1', age: 19, gender: 'male' },
+        { name: 'jim2', age: 18, gender: 'female' },
+        { name: 'jim3', age: 20, gender: 'female' },
+        { name: 'jim4', age: 21, gender: 'male' },
+        { name: 'jim5', age: 19, gender: 'female' },
+        { name: 'jim6', age: 18, gender: 'male' }
+    ];
+
+    function tag(e){
+        return document.createElement(e);
+    }
+    var table =tag('table');
+    var tbody = tag('tbody');
+    each(data,function(k,v){
+        var tr=tag('tr');
+        each(v,function(key,value){
+            var td = tag( 'td' );
+            var txt = document.createTextNode( value + '' );
+            td.appendChild( txt );
+            tr.appendChild( td );
+        })
+        tbody.appendChild(tr);
+    })
+    table.appendChild( tbody );
+    table.border='1';
+    table.width='80%';
+    document.body.appendChild(table);
+</script>
